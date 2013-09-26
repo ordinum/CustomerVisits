@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CVisits.Models.TipoVisita>
+
+@{
+    ViewBag.Title = "Listado Tipos de Visita";
+}
+
+<h2>Listado.<strong>Tipos de Visita</strong></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TipoVisitaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TipoVisitaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TipoVisitaID })
+        </td>
+    </tr>
+}
+
+</table>

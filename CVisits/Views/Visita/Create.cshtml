@@ -1,0 +1,119 @@
+﻿@model CVisits.Models.Visita
+
+@{
+    ViewBag.Title = "Programar Visita";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#FechaPlanificada").datetimepicker({ dateFormat: 'dd-mm-yy' });
+        //$("#FechaPlanificada").datetimepicker();
+
+        $("#FechaPlanificada").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'hh:mm'
+        });
+
+
+        $("#FechaTermino").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'hh:mm'
+        });
+        
+    });
+</script>
+
+<h2>Agregar.<strong>Visita</strong></h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Visita</legend>
+
+
+        @Html.HiddenFor(model => model.FechaIngreso, new { @Value = DateTime.Today })                
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaPlanificada)
+        </div>
+        <div class="editor-field">            
+            @*@(Html.JQueryUI().DatepickerFor(model=>model.FechaPlanificada).MinDate(DateTime.Today).ShowButtonPanel(true).ChangeMonth(true))*@
+            @Html.TextBoxFor(model=>model.FechaPlanificada)
+            @Html.ValidationMessageFor(model => model.FechaPlanificada)
+        </div>
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaTermino)
+        </div>
+        <div class="editor-field">
+            @*(Html.JQueryUI().DatepickerFor(model=>model.FechaTermino).MinDate(DateTime.Today).ShowButtonPanel(true).ChangeMonth(true))*@
+            @Html.TextBoxFor(model=>model.FechaTermino)
+            @Html.ValidationMessageFor(model => model.FechaTermino)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EstadoVisitaID, "Estado Visita")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EstadoVisitaID", String.Empty)
+            @Html.ValidationMessageFor(model => model.EstadoVisitaID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LineaProductoID, "Linea Producto")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("LineaProductoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.LineaProductoID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoVisitaID, "Tipo Visita")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TipoVisitaID", String.Empty)
+            @Html.ValidationMessageFor(model => model.TipoVisitaID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClienteID, "Cliente")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ClienteID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ClienteID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId, "Usuario")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("UserId", String.Empty)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
+
+        <p>
+            <input type="submit" value="Agregar" />
+        </p>
+    </fieldset>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

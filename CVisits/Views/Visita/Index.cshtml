@@ -1,0 +1,191 @@
+﻿@model IEnumerable<CVisits.Models.Visita>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#calendar').fullCalendar(
+   {
+       editable: true,
+
+       //Controlador que entrega los eventos desde BD...
+       events: "../FullCalendar/GetEvents/",
+
+       //Define cómo será el encabezado del calendario
+       header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay'
+       },
+
+       //Vista por defecto (month, agendaweek, agendaday)
+       defaultView: "month" /*"agendaWeek"*/,
+
+       //Primer día de la semana: 0 Domingo, 1 Lunes
+       firstDay: 1,
+
+       //En caso de castellanización...
+       //monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+       //monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+       //dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+       //dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+
+       editable: true,
+
+       //Tamaño de los slots de planificación en minutos
+       slotMinutes: 15,
+
+       //Eventos se pueden modificar...
+       eventStartEditable: true,
+
+       //Al clickear un evento
+       eventClick: function (event) {
+           window.open("../Visita/Edit/" + event.id, "_self");//URL Controlador + Acción + EventoID
+
+       },
+
+       //Al mover un evento...
+       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+
+           alert( //Mensaje de adevertencia...
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           //Confirmación
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveEvent",//Controlador que maneja UPDATES
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       },
+
+       //Al modificar duración/tamaño evento
+       eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+           alert(
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveResize",
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       }
+
+   });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Visitas Programadas</h2>
+
+
+<div id="calendar"></div>
+
+<div style="height: 30px; clear: both;"></div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaIngreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaPlanificada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaTermino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoVisita.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LineaProducto.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoVisita.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPlanificada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTermino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoVisita.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LineaProducto.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoVisita.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VisitaID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.VisitaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.VisitaID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
