@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CVisits.DAL;
 
 namespace CVisits.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -18,7 +20,6 @@ namespace CVisits.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
-            ViewBag.Git = "GIT!";
 
             return View();
         }

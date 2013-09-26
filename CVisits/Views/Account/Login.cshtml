@@ -4,21 +4,35 @@
     ViewBag.Title = "Iniciar sesión";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>CV.</h1>
+                <h2>Sistema de Gestión Customer Visits - Metso Minerals</h2>
+            </hgroup>
+            <p>
+                Para poder hacer uso del sistema <strong>debe iniciar sesión.</strong> Contáctese
+                con el Administrador para registrarse o asignar los roles correspondientes. Ante
+                cualquier consulta técnica por favor contáctese con <a title="Metso IT Service Desk" href="@Url.Action("Contact","Home")">Metso IT Service Desk.</a>
+            </p>
+        </div>
+    </section>
+}
 
-<section id="loginForm">
-<h2>Utilice una cuenta local para iniciar sesión.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<div class="content-wrapper" id="login-fondo">
 
-    <fieldset>
-        <legend>Formulario de inicio de sesión</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
+    <div id="loginForm" class="sombra">
+        <h2>Bienvenido.</h2>    
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Formulario de inicio de sesión</legend>
+                <ol>
+                <li>
+                    @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
@@ -30,20 +44,20 @@
             <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Iniciar sesión" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Regístrese", "Register") si no tiene ninguna cuenta.
-    </p>
-}
-</section>
+                </li>
+                </ol>
+                <input type="submit" value="Iniciar sesión" />
+                </fieldset>
+                <p>
+                @Html.ActionLink("Registrese", "Register") si no tiene ninguna cuenta.
+                </p>
+            }
+    </div>
 
-<section class="social" id="socialLoginForm">
-    <h2>Usar otro servicio para iniciar sesión.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+
+</div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

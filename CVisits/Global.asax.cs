@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebMatrix.WebData;
 
 namespace CVisits
 {
@@ -16,7 +17,13 @@ namespace CVisits
     {
         protected void Application_Start()
         {
+            
+            //SimpleMembership...                                                      
+            //WebSecurity.InitializeDatabaseConnection("CVisitsConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+            
+            //Registro de áreas...
             AreaRegistration.RegisterAllAreas();
+
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

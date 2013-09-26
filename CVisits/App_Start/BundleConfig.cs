@@ -12,8 +12,9 @@ namespace CVisits
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
-
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/jquery-ui.unobtrusive-{version}.js"));
+                      
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
