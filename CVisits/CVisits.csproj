@@ -374,7 +374,6 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - Web Deploy.pubxml" />
-    <Content Include="Images\agregar-icon.jpg" />
     <Content Include="Images\bala-metso-listas.png" />
     <Content Include="Images\brasil-miniatura.png" />
     <Content Include="Images\chile-miniatura.png" />
@@ -387,12 +386,21 @@
     <Content Include="Images\fondo-home.jpg" />
     <Content Include="Images\fondo-login.jpg" />
     <Content Include="Images\listados-icon.jpg" />
+    <Content Include="Images\metso-fullwidth.jpg" />
     <Content Include="Images\metso-logo-footer.png" />
+    <Content Include="Images\metso-logo-white.png" />
     <Content Include="Images\metso-logo.png" />
     <Content Include="Images\movimientos-icon.jpg" />
+    <Content Include="Images\Parallax\bubbles1.png" />
+    <Content Include="Images\Parallax\bubbles2.png" />
+    <Content Include="Images\Parallax\dot.png" />
+    <Content Include="Images\Parallax\firstBG.jpg" />
+    <Content Include="Images\Parallax\fourthBG.jpg" />
+    <Content Include="Images\Parallax\secondBG.jpg" />
+    <Content Include="Images\Parallax\thirdBG.jpg" />
+    <Content Include="Images\Parallax\trainers.png" />
     <Content Include="Images\rounded.png" />
     <Content Include="Images\semi-blanco.png" />
-    <Content Include="Images\sitio-web-icono.png" />
     <Content Include="Images\titulos-cajas-home.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -415,6 +423,10 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Parallax\jquery.inview.js" />
+    <Content Include="Scripts\Parallax\jquery.localscroll-1.2.7-min.js" />
+    <Content Include="Scripts\Parallax\jquery.scrollTo-1.4.2-min.js" />
+    <Content Include="Scripts\Parallax\nbw-parallax.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -490,6 +502,8 @@
     <Content Include="Images\orderedList9.png" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\Visita\WeekPlanner.cshtml" />
+    <Content Include="Views\Shared\_FooterBar.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

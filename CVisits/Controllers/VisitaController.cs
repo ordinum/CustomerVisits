@@ -76,90 +76,59 @@ namespace CVisits.Controllers
             return View(visita);
         }
 
-        public ActionResult Backend()
+        //
+        // GET: /Visita/WeekPlanner
+        public ActionResult WeekPlanner()
         {
-            return new Dpc().CallBack(this);
+            ViewBag.EstadoVisitaID = new SelectList(db.EstadoVisita, "EstadoVisitaID", "Descripcion");
+            ViewBag.LineaProductoID = new SelectList(db.LineaProducto, "LineaProductoID", "Descripcion");
+            ViewBag.TipoVisitaID = new SelectList(db.TipoVisita, "TipoVisitaID", "Descripcion");
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ClienteID", "Descripcion");
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName");
+            return View();
         }
 
-        class Dpc : DayPilotCalendar
+        //
+        // POST: /Visita/WeekPlanner
+        [HttpPost]
+        public ActionResult WeekPlanner(IList<Visita> WeekVisits, int userid)
         {
-            CVisitsContext db = new CVisitsContext();
-
-            protected override void OnInit(InitArgs e)
+            if (ModelState.IsValid)
             {
-                Update(CallBackUpdateType.Full);
-            }
-
-            //Redimensionado de Evento...
-            protected override void OnEventResize(EventResizeArgs e)
-            {
-                //Convierte el ID del plugin a entero...
-                int idevento = Convert.ToInt32(e.Id);
-                
-                //Edición de entrada...
-                Visita visita = db.Visita.Find(idevento);
-                visita.FechaPlanificada = Convert.ToDateTime(e.NewStart);//Conversiones String a Fecha
-                visita.FechaTermino = Convert.ToDateTime(e.NewEnd);
-                db.Entry(visita).State = EntityState.Modified;//Cambio de estado
-                db.SaveChanges();//Guarda cambios...
-                Update();//Actualiza calendario...
-
-            }
-
-            //Movimiento de Evento...
-            protected override void OnEventMove(EventMoveArgs e)
-            {
-                int idevento = Convert.ToInt32(e.Id);
-
-                //Edición de entrada...
-                Visita visita = db.Visita.Find(idevento);
-                visita.FechaPlanificada = Convert.ToDateTime(e.NewStart);//Conversiones String a Fecha
-                visita.FechaTermino = Convert.ToDateTime(e.NewEnd);
-                db.Entry(visita).State = EntityState.Modified;//Cambio de estado
-                db.SaveChanges();//Guarda cambios...
-                Update();//Actualiza calendario...
-            }
-
-            //Creación de Evento...
-            protected override void OnTimeRangeSelected(TimeRangeSelectedArgs e)
-            {
-                //Instancia para nuevo objeto de tipo VISITA
-                Visita visita = new Visita();
-
-                //Asignación valores...
-                visita.FechaIngreso = DateTime.Today;
-                visita.FechaPlanificada = e.Start;
-                visita.FechaTermino = e.End;
-                visita.Descripcion = (string)e.Data["name"];
-                visita.LineaProductoID = 1;
-                visita.TipoVisitaID = 1;
-                visita.UserId = 1;
-                visita.EstadoVisitaID = 1;
-                visita.ClienteID = 1;
-
-                db.Visita.Add(visita);
-                db.SaveChanges();
-                Update();
-                
-            }
-
-            //Al terminar, actualiza calendario...
-            protected override void OnFinish()
-            {
-                if (UpdateType == CallBackUpdateType.None)
+                foreach (Visita visit in WeekVisits)
                 {
-                    return;
+                    var visitRecord = new Visita();
+
+                    visitRecord.ClienteID = visit.ClienteID;
+                    visitRecord.EstadoVisitaID = visit.EstadoVisitaID;
+                    visitRecord.LineaProductoID = visit.LineaProductoID;
+                    visitRecord.TipoVisitaID = visit.TipoVisitaID;                    
+                    visitRecord.Descripcion = visit.Descripcion;
+                    visitRecord.EsTodoElDia = visit.EsTodoElDia;
+                    visitRecord.FechaIngreso = DateTime.Today;//Ingresa el día actual
+                    visitRecord.FechaPlanificada = visit.FechaPlanificada;
+                    visitRecord.FechaTermino = visit.FechaTermino;
+                    visitRecord.UserId = userid;//Guarda ID de usuario                    
+
+                    db.Visita.Add(visitRecord);
+
                 }
 
-                Events = from ev in db.Visita select ev;
+                db.SaveChanges();
 
-                DataIdField = "VisitaID";
-                DataTextField = "Descripcion";
-                DataStartField = "FechaPlanificada";
-                DataEndField = "FechaTermino";
+                return RedirectToAction("Index");
             }
-        }
 
+
+            ViewBag.EstadoVisitaID = new SelectList(db.EstadoVisita, "EstadoVisitaID", "Descripcion");
+            ViewBag.LineaProductoID = new SelectList(db.LineaProducto, "LineaProductoID", "Descripcion");
+            ViewBag.TipoVisitaID = new SelectList(db.TipoVisita, "TipoVisitaID", "Descripcion");
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ClienteID", "Descripcion");
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName");
+            
+            return View(WeekVisits);
+            
+        }
 
         //
         // GET: /Visita/Edit/5
