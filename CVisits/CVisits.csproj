@@ -267,6 +267,7 @@
     <Compile Include="Models\EstadoVisita.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\GBDateModelBinder.cs" />
     <Compile Include="Models\LineaProducto.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -291,6 +292,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DaysSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CVisits-v1.mdf" />
@@ -307,6 +309,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\jquery-ui-timepicker-addon.css" />
+    <Content Include="Content\select2.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -411,6 +414,8 @@
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery-ui-i18n.js" />
+    <Content Include="Scripts\jquery-ui-i18n.min.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery-ui.unobtrusive-2.1.0.js" />
     <Content Include="Scripts\jquery-ui.unobtrusive-2.1.0.min.js" />
@@ -427,6 +432,7 @@
     <Content Include="Scripts\Parallax\jquery.localscroll-1.2.7-min.js" />
     <Content Include="Scripts\Parallax\jquery.scrollTo-1.4.2-min.js" />
     <Content Include="Scripts\Parallax\nbw-parallax.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -504,6 +510,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Visita\WeekPlanner.cshtml" />
     <Content Include="Views\Shared\_FooterBar.cshtml" />
+    <Content Include="Views\Visita\VisitsDaysSelection.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

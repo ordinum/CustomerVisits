@@ -10,21 +10,24 @@ body {
     height: 100%;
     /* Negative indent footer by it's height */
     margin: 0 auto -60px;
+    padding-top:50px;
+    
 }
 
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-    height: 60px;
-    position:fixed;
+    height: 60px;    
     bottom:0px;
     left:0px;
     width:100%;
+    margin-top:60px;
 }
 
 #footer {
     background-color: #eee;
 }
+
 
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
@@ -36,18 +39,10 @@ body {
     }
 }
 
-.login-background {
-    background-size: cover;
-    background-position: center top;
-    background-image: url(../Images/metso-fullwidth.jpg);
-}
-
 
 
 #account-info {
-    float:right;
     display:block;
-    padding-top:12px;
 }
     #account-info .login-username {
         margin-right:3px;
@@ -64,9 +59,45 @@ body {
         float:left;
     }
 
-    
+.visit-bulk-box {
+    background-color:#e5e5e5;
+    padding:15px;
+    margin-bottom:15px;
+    border-color:#d5d5d5;
+    border-width:1px;
+    border-style:solid;
+     
+}    
 
 .logout-cross {
     float:left;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
 }
 

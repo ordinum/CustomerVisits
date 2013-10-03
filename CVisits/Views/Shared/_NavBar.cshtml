@@ -12,7 +12,7 @@
 <!-- THE NAVBAR STARTS HERE! -->
 <!-- NAVBAR: navbar-inverse(Metso Green) & navbar-default(Metso Orange) -->
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">        
+    <div class="container">
         <div class="navbar-header">
 
             <!-- TOGGLE, shows up and display MENU when window is resized for MOBILE resolutions -->
@@ -38,14 +38,17 @@
                 <!-- Nav Dropdown item -->
                 <li class="dropdown">
                     <!-- TRIGGERS DROPDOWN -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create<b class="caret"></b></a>
 
                     <!--Nested Unordered List (UL), remember, only one level is accepted for mobile usability -->
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Cliente", "Create", "Cliente")</li>
                         <li>@Html.ActionLink("Línea Producto", "Create", "LineaProducto")</li>
                         <li>@Html.ActionLink("Tipo de Visita", "Create", "TipoVisita")</li>
-                        <li>@Html.ActionLink("Visita", "Create", "Visita")</li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Schedule Visits</li>
+                        <li>@Html.ActionLink("Single Visit", "Create", "Visita")</li>
+                        <li>@Html.ActionLink("Multiple Visits", "VisitsDaysSelection", "Visita")</li>
                     </ul>
                 </li>
 
@@ -63,17 +66,20 @@
                 <!-- Single Elements -->
                 <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("About", "About", "Home")</li>
                 <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("Support", "Contact", "Home")</li>
-                
+
                 @if (!Request.IsAuthenticated)
                 {
                     <!-- Shows LOGIN link if user is not authenticated -->
                     <li>@Html.ActionLink("LOGIN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 }
 
-            </ul><!-- ends menu items -->
+            </ul>
+            <!-- ends menu items -->
 
-        </div><!-- ends navbar navbar-header -->
+        </div>
+        <!-- ends navbar navbar-header -->
 
-    </div><!-- ends container -->
+    </div>
+    <!-- ends container -->
 
 </div>

@@ -1,7 +1,6 @@
 ﻿@if (Request.IsAuthenticated)
-{                                                    
+{                                                 
     <div id="account-info">
-
         <div class="login-username">
             @Html.ActionLink(User.Identity.Name, "Manage", "Account")
         </div>
@@ -13,5 +12,5 @@
                 <a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span></a>
             }
         </div>
-    </div>        
+    </div>
 }

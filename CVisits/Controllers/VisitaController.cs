@@ -6,11 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CVisits.Models;
+using CVisits.ViewModels;
 using CVisits.DAL;
-using DayPilot.Web.Mvc;
-using DayPilot.Web.Mvc.Enums;
-using DayPilot.Web.Mvc.Events.Calendar;
-
 
 
 namespace CVisits.Controllers
@@ -77,21 +74,38 @@ namespace CVisits.Controllers
         }
 
         //
-        // GET: /Visita/WeekPlanner
-        public ActionResult WeekPlanner()
+        // GET: /Vsita/VisitsDaysSelection
+        public ActionResult VisitsDaysSelection()
         {
-            ViewBag.EstadoVisitaID = new SelectList(db.EstadoVisita, "EstadoVisitaID", "Descripcion");
-            ViewBag.LineaProductoID = new SelectList(db.LineaProducto, "LineaProductoID", "Descripcion");
-            ViewBag.TipoVisitaID = new SelectList(db.TipoVisita, "TipoVisitaID", "Descripcion");
-            ViewBag.ClienteID = new SelectList(db.Cliente, "ClienteID", "Descripcion");
-            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName");
+            return View();
+        }
+      
+        //
+        // GET: /Visita/WeekPlanner
+        public ActionResult WeekPlanner(DateTime? StartDate, DateTime? EndDate)
+        {
+            var estadovisita = db.EstadoVisita.ToList();
+            var lineaproducto = db.LineaProducto.ToList();
+
+
+            
+
+            ViewBag.EstadoVisitaID = db.EstadoVisita.ToList();
+            ViewBag.LineaProductoID = db.LineaProducto.ToList();
+            ViewBag.TipoVisitaID = db.TipoVisita.ToList();
+            ViewBag.ClienteID = db.Cliente.ToList();
+            ViewBag.UserId = db.UserProfiles.ToList();
+
+            ViewBag.StartDate = StartDate;
+            ViewBag.EndDate = EndDate;
+
             return View();
         }
 
         //
         // POST: /Visita/WeekPlanner
         [HttpPost]
-        public ActionResult WeekPlanner(IList<Visita> WeekVisits, int userid)
+        public ActionResult WeekPlanner(IList<Visita> WeekVisits)
         {
             if (ModelState.IsValid)
             {
@@ -105,10 +119,10 @@ namespace CVisits.Controllers
                     visitRecord.TipoVisitaID = visit.TipoVisitaID;                    
                     visitRecord.Descripcion = visit.Descripcion;
                     visitRecord.EsTodoElDia = visit.EsTodoElDia;
-                    visitRecord.FechaIngreso = DateTime.Today;//Ingresa el día actual
+                    visitRecord.FechaIngreso = visit.FechaIngreso;
                     visitRecord.FechaPlanificada = visit.FechaPlanificada;
                     visitRecord.FechaTermino = visit.FechaTermino;
-                    visitRecord.UserId = userid;//Guarda ID de usuario                    
+                    visitRecord.UserId = visit.UserId;
 
                     db.Visita.Add(visitRecord);
 

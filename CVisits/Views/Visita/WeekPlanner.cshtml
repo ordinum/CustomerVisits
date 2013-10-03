@@ -1,5 +1,24 @@
 ﻿@model IList<CVisits.Models.Visita>
 
+<!-- Initialize Select2 -->
+<script>
+    //In this case all SELECTs uses select2...
+    $(document).ready(function () { $("select").select2(); });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#FechaPlanificada").datetimepicker({ dateFormat: 'dd-mm-yy' });
+        //$("#FechaPlanificada").datetimepicker();
+
+        $(".dates input").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'HH:mm'
+        });
+       
+
+    });
+</script>
 
 <script type="text/javascript">
 
@@ -37,122 +56,112 @@
 </script>
 
 @{
-    ViewBag.Title = "WeekPlanner";    
+    ViewBag.Title = "Visits Scheduler";    
 }
 
-<h2>WeekPlanner</h2>
+
+@{    
+    DateTime StartDate = ViewBag.StartDate;
+    DateTime EndDate = ViewBag.EndDate;
+    DateTime Date = StartDate;
+
+    int i = 0;
+}
+
+
+<h2>Visits Scheduler</h2>
+
+<p>Start Date : @ViewBag.StartDate</p>
+<p>End Date : @ViewBag.EndDate</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Visita</legend>
 
-        <div id="InputsWrapper">
+    for (Date = StartDate; Date <= EndDate; Date = Date.AddDays(1))
+    {
+    
+    @Html.HiddenFor(model => model[i].FechaIngreso, new { @Value = DateTime.Today })
+    
+    <div class="row visit-bulk-box">
 
-            @for (int i = 0; i < 2; i++)
-            {
-            
-            
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].FechaIngreso)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].FechaIngreso)
-                    @Html.ValidationMessageFor(model => model[i].FechaIngreso)
-                </div>
+        <h4>@Date.DayOfWeek, @Date.Month/@Date.Day</h4>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].FechaPlanificada)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].FechaPlanificada)
-                    @Html.ValidationMessageFor(model => model[i].FechaPlanificada)
-                </div>
+        <div class="col-md-3">
+            <div class="dates">
+                <div class="form-group">
+                @Html.LabelFor(model => model[i].FechaPlanificada, "Visit's Date")
+                @Html.TextBoxFor(model => model[i].FechaPlanificada, new { @class = "form-control", @placeholder = "Enter date..." })
+                @Html.ValidationMessageFor(model => model[i].FechaPlanificada)
+            </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].FechaTermino)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].FechaTermino)
-                    @Html.ValidationMessageFor(model => model[i].FechaTermino)
-                </div>
-        
-                <a href="#" id="AddMoreFileBox" class="btn btn-info">Agrega Descripción</a>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].Descripcion)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].Descripcion)
-                    @Html.ValidationMessageFor(model => model[i].Descripcion)
-                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].FechaTermino, "End Date")
+                @Html.TextBoxFor(model => model[i].FechaTermino, new { @class = "form-control", @placeholder = "Enter date..." })
+                @Html.ValidationMessageFor(model => model[i].FechaTermino)
+            </div>
+            </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].EsTodoElDia)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].EsTodoElDia)
-                    @Html.ValidationMessageFor(model => model[i].EsTodoElDia)
-                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].Descripcion, "Description")
+                @Html.TextAreaFor(model => model[i].Descripcion, new { @class = "form-control", @rows = "6" })
+                @Html.ValidationMessageFor(model => model[i].Descripcion)
+            </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].EstadoVisitaID)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].EstadoVisitaID)
-                    @Html.ValidationMessageFor(model => model[i].EstadoVisitaID)
-                </div>
+        </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].LineaProductoID)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].LineaProductoID)
-                    @Html.ValidationMessageFor(model => model[i].LineaProductoID)
-                </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].TipoVisitaID)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].TipoVisitaID)
-                    @Html.ValidationMessageFor(model => model[i].TipoVisitaID)
-                </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].EstadoVisitaID, "Visit Status")
+                @Html.DropDownListFor(m => m[i].EstadoVisitaID, new SelectList(ViewBag.EstadoVisitaID, "EstadoVisitaID", "Descripcion"), "Choose...")
+                @Html.ValidationMessageFor(model => model[i].EstadoVisitaID)
+            </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].ClienteID)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].ClienteID)
-                    @Html.ValidationMessageFor(model => model[i].ClienteID)
-                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].LineaProductoID, "Product Line")
+                @Html.DropDownListFor(m => m[i].LineaProductoID, new SelectList(ViewBag.LineaProductoID, "LineaProductoID", "Descripcion"), "Choose...")
+                @Html.ValidationMessageFor(model => model[i].LineaProductoID)
+            </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model[i].UserId)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model[i].UserId)
-                    @Html.ValidationMessageFor(model => model[i].UserId)
-                </div>
-            
-            }
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].TipoVisitaID, "Visit Type")
+                @Html.DropDownListFor(m => m[i].TipoVisitaID, new SelectList(ViewBag.TipoVisitaID, "TipoVisitaID", "Descripcion"), "Choose...")
+                @Html.ValidationMessageFor(model => model[i].TipoVisitaID)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].ClienteID, "Client")
+                @Html.DropDownListFor(m => m[i].ClienteID, new SelectList(ViewBag.ClienteID, "ClienteID", "Descripcion"), "Choose...")
+                @Html.ValidationMessageFor(model => model[i].ClienteID)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model[i].UserId, "Visit scheduled by...")
+                @Html.DropDownListFor(m => m[i].UserId, new SelectList(ViewBag.UserId, "UserId", "UserName"), "Choose...")
+                @Html.ValidationMessageFor(model => model[i].UserId)
+            </div>
 
         </div>
 
 
 
+    </div>                                
+      
+        i++;
+    }
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-floppy-save"></span> Save All
+    </button>
+            
+    <a href="@Url.Action("Index")" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span> Back to Calendar</a>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -106,86 +106,73 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Visitas Programadas</h2>
+<h2>Scheduled Visits</h2>
 
 
-<div id="calendar"></div>
+<div class="row">
+
+    <div class="col-md-12">
+        <div id="calendar"></div>
+    </div>
+
+</div>
 
 <div style="height: 30px; clear: both;"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaIngreso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaPlanificada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaTermino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoVisita.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LineaProducto.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoVisita.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserProfile.UserName)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Visit's Date
+                </th>
+                <th>End Date
+                </th>
+                <th>Status
+                </th>
+                <th>Product Line
+                </th>
+                <th>Visit Type
+                </th>
+                <th>Client
+                </th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaPlanificada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaTermino)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstadoVisita.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LineaProducto.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoVisita.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserProfile.UserName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.VisitaID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.VisitaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.VisitaID })
-            </td>
-        </tr>
-    }
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaPlanificada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaTermino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoVisita.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LineaProducto.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoVisita.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Descripcion)
+                    </td>
+
+                    <td>                        
+                        <a href="@Url.Action("Edit", new { id = item.VisitaID})"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete", new { id = item.VisitaID})"><span class="glyphicon glyphicon-trash"></span></a>            
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
 
 

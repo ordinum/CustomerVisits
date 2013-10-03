@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVisits.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,7 +25,7 @@ namespace CVisits
             //Registro de áreas...
             AreaRegistration.RegisterAllAreas();
 
-
+            //ModelBinders.Binders.Add(typeof(DateTime), new GBDateModelBinder());
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
