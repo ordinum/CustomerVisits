@@ -300,9 +300,7 @@
       <DependentUpon>CVisits-v1.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
-    <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -403,6 +401,9 @@
     <Content Include="Images\Parallax\thirdBG.jpg" />
     <Content Include="Images\Parallax\trainers.png" />
     <Content Include="Images\rounded.png" />
+    <Content Include="Images\Select2\select2-spinner.gif" />
+    <Content Include="Images\Select2\select2.png" />
+    <Content Include="Images\Select2\select2x2.png" />
     <Content Include="Images\semi-blanco.png" />
     <Content Include="Images\titulos-cajas-home.png" />
     <Content Include="Scripts\bootstrap.js" />

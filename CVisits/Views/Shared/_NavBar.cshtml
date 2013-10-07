@@ -29,16 +29,18 @@
 
         <!-- MENU ITEMS -->
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">                
 
                 <!--Single Element (no caret, no dropdown) -->
-                <li class="@ActiveItem("Index", "Home", null)">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="@ActiveItem("Index", "Home", null)">                    
+                    <a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Home</a>
+                </li>
 
 
                 <!-- Nav Dropdown item -->
                 <li class="dropdown">
                     <!-- TRIGGERS DROPDOWN -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Create<b class="caret"></b></a>
 
                     <!--Nested Unordered List (UL), remember, only one level is accepted for mobile usability -->
                     <ul class="dropdown-menu">
@@ -54,7 +56,7 @@
 
                 <!-- Nav Dropdown item -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listings<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span> Listings<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Cliente", "Index", "Cliente")</li>
                         <li>@Html.ActionLink("Línea Producto", "Index", "LineaProducto")</li>
@@ -64,8 +66,8 @@
                 </li>
 
                 <!-- Single Elements -->
-                <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("About", "About", "Home")</li>
-                <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("Support", "Contact", "Home")</li>
+                <li class="@ActiveItem("About", "Home", null)"><a href="@Url.Action("About","Home")"><span class="glyphicon glyphicon-envelope"></span> About</a></li>
+                                
 
                 @if (!Request.IsAuthenticated)
                 {
