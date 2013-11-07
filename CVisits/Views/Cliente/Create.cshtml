@@ -1,4 +1,4 @@
-﻿@model CVisits.Models.Cliente
+﻿@model CVisits.ViewModels.ClienteAdd
 
 @{
     ViewBag.Title = "Agregar Cliente";
@@ -14,11 +14,11 @@
         <legend>Cliente</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Descripcion)
+            @Html.LabelFor(model => model.Cliente.Descripcion)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Descripcion)
-            @Html.ValidationMessageFor(model => model.Descripcion)
+            @Html.EditorFor(model => model.Cliente.Descripcion)
+            @Html.ValidationMessageFor(model => model.Cliente.Descripcion)
         </div>
 
         <p>
@@ -26,6 +26,24 @@
         </p>
     </fieldset>
 }
+
+<div class="clear-fix"></div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+    </tr>
+
+    @foreach (var item in Model.Clientes)
+    {
+        <tr>
+            <td>@item.ClienteID</td>
+            <td>@item.Descripcion</td>
+        </tr>
+    }
+
+</table>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

@@ -240,6 +240,18 @@
     <Compile Include="Migrations\201309110152017_estodoeldia.Designer.cs">
       <DependentUpon>201309110152017_estodoeldia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310141839470_problemaazure.cs" />
+    <Compile Include="Migrations\201310141839470_problemaazure.Designer.cs">
+      <DependentUpon>201310141839470_problemaazure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310141905005_constructorVisita.cs" />
+    <Compile Include="Migrations\201310141905005_constructorVisita.Designer.cs">
+      <DependentUpon>201310141905005_constructorVisita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311070548291_v3azure.cs" />
+    <Compile Include="Migrations\201311070548291_v3azure.Designer.cs">
+      <DependentUpon>201311070548291_v3azure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -292,13 +304,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ClienteAdd.cs" />
     <Compile Include="ViewModels\DaysSelection.cs" />
+    <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CVisits-v1.mdf" />
-    <Content Include="App_Data\CVisits-v1_log.ldf">
-      <DependentUpon>CVisits-v1.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -375,23 +385,15 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - Web Deploy.pubxml" />
-    <Content Include="Images\bala-metso-listas.png" />
     <Content Include="Images\brasil-miniatura.png" />
     <Content Include="Images\chile-miniatura.png" />
-    <Content Include="Images\degrade-horizontal-cajas.png" />
-    <Content Include="Images\degrade-horizontal.png" />
-    <Content Include="Images\fecha-titulo-fondo.png" />
-    <Content Include="Images\fondo-cajas-verde.png" />
-    <Content Include="Images\fondo-contacto.jpg" />
-    <Content Include="Images\fondo-footer.png" />
-    <Content Include="Images\fondo-home.jpg" />
     <Content Include="Images\fondo-login.jpg" />
-    <Content Include="Images\listados-icon.jpg" />
-    <Content Include="Images\metso-fullwidth.jpg" />
+    <Content Include="Images\grua-bkg.jpg" />
+    <Content Include="Images\grungeTexture.jpg" />
     <Content Include="Images\metso-logo-footer.png" />
     <Content Include="Images\metso-logo-white.png" />
     <Content Include="Images\metso-logo.png" />
-    <Content Include="Images\movimientos-icon.jpg" />
+    <Content Include="Images\mill-bkg.jpg" />
     <Content Include="Images\Parallax\bubbles1.png" />
     <Content Include="Images\Parallax\bubbles2.png" />
     <Content Include="Images\Parallax\dot.png" />
@@ -405,7 +407,6 @@
     <Content Include="Images\Select2\select2.png" />
     <Content Include="Images\Select2\select2x2.png" />
     <Content Include="Images\semi-blanco.png" />
-    <Content Include="Images\titulos-cajas-home.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fullcalendar.js" />
@@ -494,26 +495,15 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Visita\WeekPlanner.cshtml" />
     <Content Include="Views\Shared\_FooterBar.cshtml" />
     <Content Include="Views\Visita\VisitsDaysSelection.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -526,6 +516,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309110152017_estodoeldia.resx">
       <DependentUpon>201309110152017_estodoeldia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310141839470_problemaazure.resx">
+      <DependentUpon>201310141839470_problemaazure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310141905005_constructorVisita.resx">
+      <DependentUpon>201310141905005_constructorVisita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311070548291_v3azure.resx">
+      <DependentUpon>201311070548291_v3azure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

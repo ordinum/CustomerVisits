@@ -1,44 +1,189 @@
-﻿@{
+﻿@model CVisits.ViewModels.IndexView
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#calendar').fullCalendar(
+   {
+       editable: true,
+
+       //Fetch visits from DB...
+       // IDs >> Comercial = 1, Técnica = 2       
+       eventSources: [
+        {
+            //Fetch COMERCIAL events...
+            url: '../FullCalendar/GetEventsByType?typeid=1',
+            color: 'yellow',
+            textColor: 'black'
+        },
+
+       {
+           //Fetch TECNICA events...
+           url: '../FullCalendar/GetEventsByType?typeid=2', // use the `url` property
+           color: 'red',
+           textColor: 'black'
+       }
+
+       ],
+
+
+       //Defines header of calendar...
+       header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay'
+       },
+
+       //('month', 'agendaweek', 'agendaday')
+       defaultView: "month",
+
+       //First day of the week: Sunday = 0, Monday = 1
+       firstDay: 1,
+
+       //Is editable? (boolean)
+       editable: true,
+
+       //Slot size...
+       slotMinutes: 15,
+
+       //Can move events...(boolean)...
+       eventStartEditable: true,
+
+       //When clicking an event goes to the edit form of that event...
+       eventClick: function (event) {
+           window.open("../Visita/Edit/" + event.id, "_self");//Controller + Action + EventoID
+
+       },
+
+       //When moving an evento...
+       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+
+           alert( //Warning Message...
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           //Confirmation...
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveEvent",//Manage event updates
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       },
+
+       //When modifying event size...
+       eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+           alert(
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveResize",
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       }
+
+   });
+    });
+</script>
+
+@{
     ViewBag.Title = "Customer Visits - Metso Minerals Chile";
 }
 
 @section featured {
 
     <!-- JUMBOTRON / FEATURED -->
-    <div class="jumbotron">
+    <div class="jumbotron mill-background hero-jumbotron">
         <div class="container">
-            <h1>@ViewBag.Title.</h1>
-            <h2>@ViewBag.Message</h2>
-            <p>
-                To learn more about ASP.NET MVC visit
-      <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-      The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-      If you have any questions about ASP.NET MVC visit
-            </p>
-            <a class="btn btn-large btn-success" href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            <h1>Customer Visits</h1>
+            <h2>Planning System</h2>            
         </div>
     </div>
 }
 
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting Started</h2>
-        <p>ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-    enables a clean separation of concerns and that gives you full control over markup
-    for enjoyable, agile development. ASP.NET MVC includes many features that enable
-    fast, TDD-friendly development for creating sophisticated applications that use
-    the latest web standards.</p>
-    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more &raquo;</a></p>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <div id="calendar"></div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Add NuGet packages and jump-start your coding</h2>
-        <p>NuGet makes it easy to install and update free libraries and tools.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Find Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more &raquo;</a></p>
+
+</div>
+
+
+
+
+<div class="jumbotron grunge-background">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h3>Visits for next 7 days</h3>
+                <p>@ViewBag.Today</p>
+                <p>@ViewBag.Next7Days</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Cliente</th>
+                            <th>Fecha Planificación</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var visit in Model.Next7Visits)
+                        {
+                            <tr>
+                                <td>@visit.Descripcion</td>
+                                <td>@visit.Cliente.Descripcion</td>
+                                <td>@visit.FechaPlanificada</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
     </div>
 </div>
+
+
+
+

@@ -67,6 +67,32 @@ namespace CVisits.Controllers
             } return Json(clientList.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
+
+        //Get all events by type...
+        public JsonResult GetEventsByType(double start, double end, int typeid)
+        {
+            var startDateTime = FromUnixTimestamp(start);
+            var endDateTime = FromUnixTimestamp(end);            
+
+            var events = db.Visita.Where(e => e.FechaPlanificada > startDateTime && e.FechaTermino < endDateTime && e.TipoVisitaID == typeid);
+
+            var clientList = new List<object>();
+
+            foreach (var e in events)
+            {
+                clientList.Add(new
+                {                    
+                    id = e.VisitaID,
+                    title = e.Descripcion,
+                    description = e.Descripcion,
+                    start = ConvertToTimestamp(e.FechaPlanificada),
+                    end = ConvertToTimestamp(e.FechaTermino),
+                    allDay = e.EsTodoElDia,
+
+                });
+            } return Json(clientList.ToArray(), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult MoveEvent(double days, double minutes, int id)
         {
             
@@ -80,6 +106,7 @@ namespace CVisits.Controllers
             
             db.Entry(evento).State = EntityState.Modified;
             db.SaveChanges();
+
             return Json("Done", JsonRequestBehavior.AllowGet);
         }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CVisits.Models;
+using CVisits.ViewModels;
 using CVisits.DAL;
 
 namespace CVisits.Controllers
@@ -40,7 +41,13 @@ namespace CVisits.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            //Instancia View Model
+            ClienteAdd viewModel = new ClienteAdd();
+
+            //Asigna lista de Clientes...
+            viewModel.Clientes = db.Cliente.ToList();
+
+            return View(viewModel);
         }
 
         //

@@ -186,6 +186,8 @@ html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -394,8 +396,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-family: 'PT Sans',"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
   line-height: 1.1;
 }
 h1 small,
@@ -4135,7 +4137,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color:#999;
 }
 .jumbotron h1 {
   line-height: 1;
@@ -4160,6 +4162,21 @@ a.list-group-item.active > .badge,
     font-size: 63px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .jumbotron h1 {
+    font-size: 40px;
+  }
+}
+
 .thumbnail {
   padding: 4px;
   line-height: 1.428571429;

@@ -7,58 +7,53 @@
    {
        editable: true,
 
-       //Controlador que entrega los eventos desde BD...
+       //Fetch visits from DB...
        events: "../FullCalendar/GetEvents/",
 
-       //Define cómo será el encabezado del calendario
+       //Defines header of calendar...
        header: {
            left: 'prev,next today',
            center: 'title',
            right: 'month,agendaWeek,agendaDay'
        },
 
-       //Vista por defecto (month, agendaweek, agendaday)
-       defaultView: "month" /*"agendaWeek"*/,
+       //('month', 'agendaweek', 'agendaday')
+       defaultView: "month",
 
-       //Primer día de la semana: 0 Domingo, 1 Lunes
+       //First day of the week: Sunday = 0, Monday = 1
        firstDay: 1,
 
-       //En caso de castellanización...
-       //monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-       //monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-       //dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-       //dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-
+       //Is editable? (boolean)
        editable: true,
 
-       //Tamaño de los slots de planificación en minutos
+       //Slot size...
        slotMinutes: 15,
 
-       //Eventos se pueden modificar...
+       //Can move events...(boolean)...
        eventStartEditable: true,
 
-       //Al clickear un evento
+       //When clicking an event goes to the edit form of that event...
        eventClick: function (event) {
-           window.open("../Visita/Edit/" + event.id, "_self");//URL Controlador + Acción + EventoID
+           window.open("../Visita/Edit/" + event.id, "_self");//Controller + Action + EventoID
 
        },
 
-       //Al mover un evento...
+       //When moving an evento...
        eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
 
-           alert( //Mensaje de adevertencia...
+           alert( //Warning Message...
                 event.title + " was moved " +
                 dayDelta + " days and " +
                 minuteDelta + " minutes."
            );
 
-           //Confirmación
+           //Confirmation...
            if (!confirm("Are you sure about this change?")) {
                revertFunc();
            }
            else {
                $.post(
-                   "../FullCalendar/MoveEvent",//Controlador que maneja UPDATES
+                   "../FullCalendar/MoveEvent",//Manage event updates
                         {
                             days: dayDelta,
                             minutes: minuteDelta,
@@ -71,7 +66,7 @@
            }
        },
 
-       //Al modificar duración/tamaño evento
+       //When modifying event size...
        eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
 
            alert(
@@ -103,10 +98,10 @@
 </script>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Visits Planner";
 }
 
-<h2>Scheduled Visits</h2>
+<h2>Visits Planner</h2>
 
 
 <div class="row">

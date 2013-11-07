@@ -11,32 +11,34 @@ namespace CVisits.Models
 {
     public class Visita
     {
+
+        public Visita()
+        {
+            this.FechaIngreso = DateTime.Now;
+        }        
+
         //ID
         public int VisitaID { get; set; }
 
-        //[DataType(DataType.Date)]
-        [DisplayName("Fecha Ingreso")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "Debe ingresar una fecha")]
         public DateTime FechaIngreso { get; set; }
 
-        //[DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [DisplayName("Fecha Planificación")]
         //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = false)]
-        [Required(ErrorMessage = "Debe ingresar una fecha")]
+        [Required(ErrorMessage = "Debe ingresar una fecha de planificación")]
         public DateTime FechaPlanificada { get; set; }
 
-        //[DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [DisplayName("Fecha Término")]
         //[DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "Debe ingresar una fecha")]
+        [Required(ErrorMessage = "Debe ingresar una fecha de término")]
         public DateTime FechaTermino { get; set; }
 
         [Required]
         [DataType(DataType.MultilineText)]
         public string Descripcion { get; set; }
 
-
+        [Required]
         public bool EsTodoElDia { get; set; }
 
         //---------------------------------------------------
@@ -58,6 +60,6 @@ namespace CVisits.Models
 
         //A muchos...
         public virtual ICollection<Reporte> Reporte { get; set; }
-        
+
     }
 }

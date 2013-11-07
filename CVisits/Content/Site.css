@@ -1,4 +1,32 @@
-﻿html,
+﻿.hero-jumbotron {
+    height:500px;
+    border-bottom-width:1px;
+    border-bottom-color:#535353;    
+}
+
+.grunge-background {
+    background-image:url('../Images/grungeTexture.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+.mill-background {
+    background-image:url('../Images/mill-bkg.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+.grua-background {
+    background-image:url('../Images/grua-bkg.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+
+
+
+
+html,
 body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
