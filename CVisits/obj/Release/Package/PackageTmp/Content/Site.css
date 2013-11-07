@@ -1,0 +1,136 @@
+﻿.hero-jumbotron {
+    height:500px;
+    border-bottom-width:1px;
+    border-bottom-color:#535353;    
+}
+
+    .hero-jumbotron h1, .hero-jumbotron h2 {
+        color:white;
+        text-shadow:1px 1px 1px #535353;
+    }
+
+.grunge-background {
+    background-image:url('../Images/grungeTexture.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+.mill-background {
+    background-image:url('../Images/mill-bkg.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+.grua-background {
+    background-image:url('../Images/grua-bkg.jpg');
+    background-repeat:repeat;
+    background-position:center top;
+}
+
+
+
+
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+    padding-top:50px;
+    
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;    
+    bottom:0px;
+    left:0px;
+    width:100%;
+    margin-top:60px;
+}
+
+#footer {
+    background-color: #eee;
+}
+
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+
+#account-info {
+    display:block;
+}
+    #account-info .login-username {
+        margin-right:3px;
+        float:left;
+        display:block;
+    }
+
+    #account-info .user-logout {
+        float:left;
+        display:block;
+    }
+
+    #account-info form {
+        float:left;
+    }
+
+.visit-bulk-box {
+    background-color:#e5e5e5;
+    padding:15px;
+    margin-bottom:15px;
+    border-color:#d5d5d5;
+    border-width:1px;
+    border-style:solid;
+     
+}    
+
+.logout-cross {
+    float:left;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+

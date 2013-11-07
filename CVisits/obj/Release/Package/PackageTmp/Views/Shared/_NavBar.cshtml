@@ -1,0 +1,87 @@
+﻿<!-- HELPER for ACTIVE PAGE, adds :ACTIVE pseudoclass to active link (darker background) -->
+@helper ActiveItem(string actionName, string controllerName, string areaName)
+{
+    if (ViewContext.RouteData.Values["action"].ToString() == actionName &&
+            ViewContext.RouteData.Values["controller"].ToString() == controllerName &&
+            (ViewContext.RouteData.DataTokens["area"] == null || ViewContext.RouteData.DataTokens["area"].ToString() == areaName))
+    {
+    @:active
+    }
+}
+
+<!-- THE NAVBAR STARTS HERE! -->
+<!-- NAVBAR: navbar-inverse(Metso Green) & navbar-default(Metso Orange) -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <!-- TOGGLE, shows up and display MENU when window is resized for MOBILE resolutions -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- METSO LOGO -->
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                <img src="~/Images/metso-logo-white.png" title="Metso Minerals" /></a>
+        </div>
+
+        <!-- MENU ITEMS -->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">                
+
+                <!--Single Element (no caret, no dropdown) -->
+                <li class="@ActiveItem("Index", "Home", null)">                    
+                    <a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Home</a>
+                </li>
+
+
+                <!-- Nav Dropdown item -->
+                <li class="dropdown">
+                    <!-- TRIGGERS DROPDOWN -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Create<b class="caret"></b></a>
+
+                    <!--Nested Unordered List (UL), remember, only one level is accepted for mobile usability -->
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Cliente", "Create", "Cliente")</li>
+                        <li>@Html.ActionLink("Línea Producto", "Create", "LineaProducto")</li>
+                        <li>@Html.ActionLink("Tipo de Visita", "Create", "TipoVisita")</li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Schedule Visits</li>
+                        <li>@Html.ActionLink("Single Visit", "Create", "Visita")</li>
+                        <li>@Html.ActionLink("Multiple Visits", "VisitsDaysSelection", "Visita")</li>
+                    </ul>
+                </li>
+
+                <!-- Nav Dropdown item -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span> Listings<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Cliente", "Index", "Cliente")</li>
+                        <li>@Html.ActionLink("Línea Producto", "Index", "LineaProducto")</li>
+                        <li>@Html.ActionLink("Tipo de Visita", "Index", "TipoVisita")</li>
+                        <li>@Html.ActionLink("Visita", "Index", "Visita")</li>
+                    </ul>
+                </li>
+
+                <!-- Single Elements -->
+                <li class="@ActiveItem("About", "Home", null)"><a href="@Url.Action("About","Home")"><span class="glyphicon glyphicon-envelope"></span> About</a></li>
+                                
+
+                @if (!Request.IsAuthenticated)
+                {
+                    <!-- Shows LOGIN link if user is not authenticated -->
+                    <li>@Html.ActionLink("LOGIN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                }
+
+            </ul>
+            <!-- ends menu items -->
+
+        </div>
+        <!-- ends navbar navbar-header -->
+
+    </div>
+    <!-- ends container -->
+
+</div>

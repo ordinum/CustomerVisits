@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="metsocustomervisits" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Daniel\\Documents\\Visual\ Studio\ 2012\\Projects\\CVisits\\CVisits\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Daniel\\Documents\\Visual\ Studio\ 2012\\Projects\\CVisits\\CVisits\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="CVisitsContext-Web.config Connection String" description="" value="Data Source=tcp:snbqyigdph.database.windows.net,1433;Initial Catalog=metsocustomervisits;User Id=metsocustomervisits@snbqyigdph;Password=Metso2013" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Daniel\\Documents\\Visual\ Studio\ 2012\\Projects\\CVisits\\CVisits\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CVisitsContext']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:snbqyigdph.database.windows.net,1433;Initial Catalog=metsocustomervisits;User Id=metsocustomervisits@snbqyigdph;Password=Metso2013" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Daniel\\Documents\\Visual\ Studio\ 2012\\Projects\\CVisits\\CVisits\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

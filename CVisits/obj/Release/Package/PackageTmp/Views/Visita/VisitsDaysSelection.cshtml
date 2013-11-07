@@ -1,0 +1,48 @@
+﻿@model CVisits.ViewModels.DaysSelection
+
+@{
+    ViewBag.Title = "VisitsDaysSelection";
+}
+
+
+@using (Html.BeginForm("WeekPlanner", "Visita", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Choose date range to be scheduled...</h2>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="StartDate">Start Date</label>
+                    @Html.JQueryUI().Datepicker("StartDate").MinDate(0).ChangeMonth(true).ShowButtonPanel(true).ShowOn(DatepickerShowOn.Focus).DateFormat("yyyy-mm-dd")
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="EndDate">End Date</label>
+                @Html.JQueryUI().Datepicker("EndDate").MinDate(1).ChangeMonth(true).ShowButtonPanel(true).ShowOn(DatepickerShowOn.Focus).DateFormat("yyyy-mm-dd")
+            </div>
+
+
+        </div>
+
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+            <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-save"></span>Go!
+        </button>
+
+        <a href="@Url.Action("Index")" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span>Back to Calendar</a>
+        </div>
+
+    </div>
+    
+    
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,173 @@
+﻿@model IEnumerable<CVisits.Models.Visita>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#calendar').fullCalendar(
+   {
+       editable: true,
+
+       //Fetch visits from DB...
+       events: "../FullCalendar/GetEvents/",
+
+       //Defines header of calendar...
+       header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay'
+       },
+
+       //('month', 'agendaweek', 'agendaday')
+       defaultView: "month",
+
+       //First day of the week: Sunday = 0, Monday = 1
+       firstDay: 1,
+
+       //Is editable? (boolean)
+       editable: true,
+
+       //Slot size...
+       slotMinutes: 15,
+
+       //Can move events...(boolean)...
+       eventStartEditable: true,
+
+       //When clicking an event goes to the edit form of that event...
+       eventClick: function (event) {
+           window.open("../Visita/Edit/" + event.id, "_self");//Controller + Action + EventoID
+
+       },
+
+       //When moving an evento...
+       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+
+           alert( //Warning Message...
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           //Confirmation...
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveEvent",//Manage event updates
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       },
+
+       //When modifying event size...
+       eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+           alert(
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveResize",
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       }
+
+   });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Visits Planner";
+}
+
+<h2>Visits Planner</h2>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div id="calendar"></div>
+    </div>
+
+</div>
+
+<div style="height: 30px; clear: both;"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Visit's Date
+                </th>
+                <th>End Date
+                </th>
+                <th>Status
+                </th>
+                <th>Product Line
+                </th>
+                <th>Visit Type
+                </th>
+                <th>Client
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaPlanificada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaTermino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoVisita.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LineaProducto.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoVisita.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Descripcion)
+                    </td>
+
+                    <td>                        
+                        <a href="@Url.Action("Edit", new { id = item.VisitaID})"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete", new { id = item.VisitaID})"><span class="glyphicon glyphicon-trash"></span></a>            
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+
+

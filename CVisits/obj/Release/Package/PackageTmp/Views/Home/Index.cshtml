@@ -1,0 +1,182 @@
+﻿@model CVisits.ViewModels.IndexView
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#calendar').fullCalendar(
+   {
+       editable: true,
+
+       //Fetch visits from DB...
+       // IDs >> Comercial = 1, Técnica = 2       
+       eventSources: [
+        {
+            //Fetch COMERCIAL events...
+            url: '../FullCalendar/GetEventsByType?typeid=1',
+            color: 'yellow',
+            textColor: 'black'
+        },
+
+       {
+           //Fetch TECNICA events...
+           url: '../FullCalendar/GetEventsByType?typeid=5', // use the `url` property
+           color: 'red',
+           textColor: 'black'
+       }
+
+       ],
+
+
+       //Defines header of calendar...
+       header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay'
+       },
+
+       //('month', 'agendaweek', 'agendaday')
+       defaultView: "month",
+
+       //First day of the week: Sunday = 0, Monday = 1
+       firstDay: 1,
+
+       //Is editable? (boolean)
+       editable: true,
+
+       //Slot size...
+       slotMinutes: 15,
+
+       //Can move events...(boolean)...
+       eventStartEditable: true,
+
+       //When clicking an event goes to the edit form of that event...
+       eventClick: function (event) {
+           window.open("../Visita/Edit/" + event.id, "_self");//Controller + Action + EventoID
+
+       },
+
+       //When moving an evento...
+       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+
+           alert( //Warning Message...
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           //Confirmation...
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveEvent",//Manage event updates
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       },
+
+       //When modifying event size...
+       eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+           alert(
+                event.title + " was moved " +
+                dayDelta + " days and " +
+                minuteDelta + " minutes."
+           );
+
+           if (!confirm("Are you sure about this change?")) {
+               revertFunc();
+           }
+           else {
+               $.post(
+                   "../FullCalendar/MoveResize",
+                        {
+                            days: dayDelta,
+                            minutes: minuteDelta,
+                            id: event.id
+                        },
+                        function (json) {
+                            alert(json);
+                        }, "json"
+                   );
+           }
+       }
+
+   });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Customer Visits - Metso Minerals Chile";
+}
+
+@section featured {
+
+    <!-- JUMBOTRON / FEATURED -->
+    <div class="jumbotron mill-background hero-jumbotron">
+        <div class="container">
+            <h1>Customer Visits</h1>
+            <h2>Planning System</h2>            
+        </div>
+    </div>
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div id="calendar"></div>
+        </div>
+
+    </div>
+
+</div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h3>Visits for next 7 days</h3>
+
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Cliente</th>
+                            <th>Fecha Planificación</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var visit in Model.Next7Visits)
+                        {
+                            <tr>
+                                <td>@visit.Descripcion</td>
+                                <td>@visit.Cliente.Descripcion</td>
+                                <td>@visit.FechaPlanificada</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+   
+
+
+
+

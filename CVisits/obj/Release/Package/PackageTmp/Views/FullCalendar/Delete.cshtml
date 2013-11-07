@@ -1,0 +1,82 @@
+﻿@model CVisits.Models.Visita
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Visita</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaIngreso)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaIngreso)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaPlanificada)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaPlanificada)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaTermino)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaTermino)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EstadoVisita.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EstadoVisita.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LineaProducto.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LineaProducto.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoVisita.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoVisita.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cliente.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cliente.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserProfile.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile.UserName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

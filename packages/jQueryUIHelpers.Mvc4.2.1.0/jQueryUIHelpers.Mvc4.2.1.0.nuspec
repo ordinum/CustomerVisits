@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>jQueryUIHelpers.Mvc4</id>
+    <version>2.1.0</version>
+    <authors>Attila Losonc</authors>
+    <owners>Attila Losonc</owners>
+    <licenseUrl>https://bitbucket.org/attilax/jqueryuihelpers/raw/58df63b2c5854996f5950f4b243c4c0892c073cf/license.txt</licenseUrl>
+    <projectUrl>http://jqueryuihelpers.apphb.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Speed up your work by using these HTML helpers to integrate jQuery UI into your ASP.NET MVC 4 application. Requires the .NET Framework 4 and ASP.NET MVC4.</description>
+    <summary>The easy way to integrate jQuery UI into your ASP.NET MVC 4 application.</summary>
+    <copyright>Copyright 2012</copyright>
+    <tags>jQueryUI jQuery MVC4</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.7" />
+      <dependency id="jQuery.UI.Combined" version="1.10" />
+    </dependencies>
+  </metadata>
+</package>

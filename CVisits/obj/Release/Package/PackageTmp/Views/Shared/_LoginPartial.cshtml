@@ -1,0 +1,16 @@
+﻿@if (Request.IsAuthenticated)
+{                                                 
+    <div id="account-info">
+        <div class="login-username">
+            @Html.ActionLink(User.Identity.Name, "Manage", "Account")
+        </div>
+
+        <div class="user-logout">
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()                                                                    
+                <a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span></a>
+            }
+        </div>
+    </div>
+}
