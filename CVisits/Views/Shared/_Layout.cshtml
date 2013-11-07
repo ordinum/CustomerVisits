@@ -68,10 +68,10 @@
         <!-- Jumbotron/Featured -->
         @RenderSection("featured", required: false)
 
-        <!-- Begin page content, loads VIEWs -->
-        
+        <!-- Begin page content, loads VIEWs -->        
+        <div class="container">
             @RenderBody()
-        
+        </div>
 
         <!-- Pusher for sticky/fixed footer, must be same HEIGHT as #footer -->
         <div id="push"></div>

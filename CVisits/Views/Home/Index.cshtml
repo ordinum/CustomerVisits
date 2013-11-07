@@ -18,7 +18,7 @@
 
        {
            //Fetch TECNICA events...
-           url: '../FullCalendar/GetEventsByType?typeid=2', // use the `url` property
+           url: '../FullCalendar/GetEventsByType?typeid=5', // use the `url` property
            color: 'red',
            textColor: 'black'
        }
@@ -133,7 +133,7 @@
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div id="calendar"></div>
         </div>
 
@@ -141,20 +141,14 @@
 
 </div>
 
-
-
-
-<div class="jumbotron grunge-background">
-    <div class="container">
         <div class="row">
 
             <div class="col-md-12">
 
                 <h3>Visits for next 7 days</h3>
-                <p>@ViewBag.Today</p>
-                <p>@ViewBag.Next7Days</p>
 
-                <table>
+
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Descripcion</th>
@@ -181,8 +175,7 @@
             </div>
 
         </div>
-    </div>
-</div>
+   
 
 
 

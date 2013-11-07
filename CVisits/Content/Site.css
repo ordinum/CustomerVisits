@@ -4,6 +4,11 @@
     border-bottom-color:#535353;    
 }
 
+    .hero-jumbotron h1, .hero-jumbotron h2 {
+        color:white;
+        text-shadow:1px 1px 1px #535353;
+    }
+
 .grunge-background {
     background-image:url('../Images/grungeTexture.jpg');
     background-repeat:repeat;

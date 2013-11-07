@@ -309,6 +309,10 @@
     <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CVisits-v1.mdf" />
+    <Content Include="App_Data\CVisits-v1_log.ldf">
+      <DependentUpon>CVisits-v1.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -501,9 +505,7 @@
     <Content Include="Views\Shared\_FooterBar.cshtml" />
     <Content Include="Views\Visita\VisitsDaysSelection.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
