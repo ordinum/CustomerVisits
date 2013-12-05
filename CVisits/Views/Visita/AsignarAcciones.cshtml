@@ -1,0 +1,213 @@
+﻿@model CVisits.ViewModels.VisitaAccionesViewModel
+
+@{
+    ViewBag.Title = "Assign Actions";
+    
+}
+
+
+<script type="text/javascript">
+
+
+    //KO MVVM para ACCIONES repetitivas...
+    function createViewModel() {
+
+        /*
+        IMPORTANTE: Archivo script "knockout.namepathbinding.js" debe
+        estar cargado en el proyecto.
+        */
+
+        //Crea primera posición [0]...
+        var createPosition = function () {
+            return {
+                fechaaccion: ko.observable(),
+                descripcion: ko.observable(),
+                responsable: ko.observable(),
+                accionestado: ko.observable()
+            };
+        };
+
+        //Agrega posición...
+        var addPosition = function () {
+            positions.push(createPosition());
+            $("select").select2();
+            $(".fecha-accion").datetimepicker({
+                dateFormat: 'yy-mm-dd',
+                timeFormat: 'HH:mm'
+            });
+        };
+
+        //Remueve última posición...
+        var removePosition = function () {
+            positions.pop();
+        };
+
+        //Array con información...
+        var positions = ko.observableArray([createPosition()]);
+
+
+        return {
+            positions: positions,
+            addPosition: addPosition,
+            removePosition: removePosition
+        };
+    }
+
+    //Página cargada...
+    $(document).ready(function () {
+
+        //Inicializa KO MVVM para ACCIONES repetitivas...
+        var viewModel = createViewModel();
+        ko.applyBindings(viewModel);
+
+        //DateTime Picker fechas...
+        $("#Visita_FechaPlanificada").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'HH:mm'
+        });
+
+        $("#Visita_FechaTermino").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'HH:mm'
+        });
+
+        $(".fecha-accion").datetimepicker({
+            dateFormat: 'yy-mm-dd',
+            timeFormat: 'HH:mm'
+        });
+
+        //Todos los select son select2...
+        $("select").select2();
+
+    });
+
+
+</script>
+
+
+<!-- ACCIONES -->
+<div class="row" style="margin-top: 15px;">
+
+    <h2>Actions</h2>
+
+    <div class="col-md-4">
+
+        <!-- Botonera -->
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", "Visita", new { id = Model.Visita.VisitaID })" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Back to Visit</a>
+                    <a href="@Url.Action("Index","Home")" class="btn btn-info"><span class="glyphicon glyphicon-calendar"></span> Back to Calendar</a>
+                </div>
+
+                <p style="color: #808080; margin-top: 5px; font-size: 0.7em;">
+                    <strong>Note: </strong>Every ACTION will be notified to the assigned user.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <h3>Visit Details</h3>
+            </div>
+
+            <div class="row">
+                <h5><strong>Scheduled Date</strong></h5>
+                <p>@Html.DisplayFor(model => model.Visita.FechaPlanificada)</p>
+            </div>
+
+            <div class="row">
+                <h5><strong>Scheduled Date</strong></h5>
+                <p>@Html.DisplayFor(model => model.Visita.FechaTermino)</p>
+            </div>
+
+            <div class="row">
+                <h5><strong>Cliente</strong></h5>
+                <p>@ViewBag.Cliente</p>
+            </div>
+
+            <div class="row">
+                <h5><strong>Product Line</strong></h5>
+                <p>@ViewBag.LineaProducto</p>
+            </div>
+
+            <div class="row">
+                <h5><strong>Visit Type</strong></h5>
+                <p>@ViewBag.TipoVisita</p>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- fin columna izquierda -->
+
+    <!--Estilo para campos repetitivos -->
+    <style type="text/css">
+        .accion-repetitiva {
+            padding: 10px 0px 10px 0px;
+            margin-bottom: 10px;
+            border-bottom: dotted;
+            border-bottom-color: #808080;
+            border-bottom-width: 1px;
+        }
+    </style>
+
+    <!--Campos repetitivos -->
+    <div class="col-md-8" style="padding-top: 65px;">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="btn-group pull-right" style="margin-bottom:10px;">
+                <button type="button" class="btn btn-primary" data-bind="click: addPosition">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add Action
+                </button>
+
+                <button type="button" class="btn btn-warning" data-bind="click: removePosition">
+                    <span class="glyphicon glyphicon-minus-sign"></span> Remove Action            
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-save"></span> Save            
+                </button>
+      
+
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            @Html.HiddenFor(model => model.Visita.VisitaID)
+            
+            <fieldset id="head">
+                <legend class="hidden">Add Items</legend>
+                @Html.EditorFor(model => model.Acciones)
+            </fieldset>
+            
+            <div class="clearfix"></div>
+            
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-primary" data-bind="click: addPosition">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add Action
+                </button>
+
+                <button type="button" class="btn btn-warning" data-bind="click: removePosition">
+                    <span class="glyphicon glyphicon-minus-sign"></span> Remove Action            
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-save"></span> Save            
+                </button>                
+
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

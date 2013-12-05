@@ -29,14 +29,16 @@ namespace CVisits.Models
         // RELACIONES
         //
 
-        //A uno...
-        public int ReporteID { get; set; }        
+        //A uno...        
         public int AccionResponsableID { get; set; }
         public int AccionEstadoID { get; set; }
-
-        public virtual Reporte Reporte { get; set; }        
+        public int VisitaID { get; set; }
+        
         public virtual AccionResponsable AccionResponsable { get; set; }
         public virtual AccionEstado AccionEstado { get; set; }
+        public virtual Visita Visita { get; set; }
+
+        //A muchos...                
     
     }
 }

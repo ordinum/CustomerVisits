@@ -12,15 +12,15 @@
         {
             //Fetch COMERCIAL events...
             url: '../FullCalendar/GetEventsByType?typeid=1',
-            color: 'yellow',
-            textColor: 'black'
+            color: '#e05314',            
+            textColor: 'white'
         },
 
        {
            //Fetch TECNICA events...
-           url: '../FullCalendar/GetEventsByType?typeid=5', // use the `url` property
-           color: 'red',
-           textColor: 'black'
+           url: '../FullCalendar/GetEventsByType?typeid=2', // use the `url` property
+           color: '#429682',
+           textColor: 'white'
        }
 
        ],
@@ -122,8 +122,10 @@
     <!-- JUMBOTRON / FEATURED -->
     <div class="jumbotron mill-background hero-jumbotron">
         <div class="container">
-            <h1>Customer Visits</h1>
-            <h2>Planning System</h2>            
+            <div class="col-md-5">
+                <h1>Customer's Visits</h1>
+                <h2>Planning System</h2>
+            </div>
         </div>
     </div>
 }
@@ -141,41 +143,41 @@
 
 </div>
 
-        <div class="row">
+<div class="row">
 
-            <div class="col-md-12">
+    <div class="col-md-12">
 
-                <h3>Visits for next 7 days</h3>
+        <h3>Visits for next 7 days</h3>
 
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Descripcion</th>
-                            <th>Cliente</th>
-                            <th>Fecha Planificación</th>
-                        </tr>
-                    </thead>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Cliente</th>
+                    <th>Fecha Planificación</th>
+                </tr>
+            </thead>
 
-                    <tbody>
+            <tbody>
 
-                        @foreach (var visit in Model.Next7Visits)
-                        {
-                            <tr>
-                                <td>@visit.Descripcion</td>
-                                <td>@visit.Cliente.Descripcion</td>
-                                <td>@visit.FechaPlanificada</td>
-                            </tr>
-                        }
+                @foreach (var visit in Model.Next7Visits)
+                {
+                    <tr>
+                        <td>@visit.Descripcion</td>
+                        <td>@visit.Cliente.Descripcion</td>
+                        <td>@visit.FechaPlanificada</td>
+                    </tr>
+                }
 
-                    </tbody>
+            </tbody>
 
-                </table>
+        </table>
 
-            </div>
+    </div>
 
-        </div>
-   
+</div>
+
 
 
 

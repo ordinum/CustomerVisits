@@ -25,8 +25,7 @@ namespace CVisits.Models
 
         //A muchos...
         public virtual ICollection<ClienteContacto> ClienteContacto { get; set; }
-        public virtual ICollection<ClienteFaena> ClienteFaena { get; set; }
-        public virtual ICollection<Reporte> Reporte { get; set; }
+        public virtual ICollection<ClienteFaena> ClienteFaena { get; set; }        
         public virtual ICollection<Visita> Visita { get; set; }        
 
     }

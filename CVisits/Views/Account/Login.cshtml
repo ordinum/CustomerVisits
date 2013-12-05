@@ -1,40 +1,126 @@
 ﻿@model CVisits.Models.LoginModel
 
 @{
-    ViewBag.Title = "Iniciar sesión";
+    ViewBag.Title = "Customer's Visits - Please Sign In | Metso Minerals";
 }
 
-@*@section featured {
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Login</h1>
-            <h2>Customer Visits Magament System - Metso Minerals</h2>
-            <p>
-                You must be registered to use the system. In case of any trouble you can contact <a title="Metso IT Service Desk" href="@Url.Action("Contact", "Home")">Metso IT Service Desk.</a>
-                for help.
-            </p>
+
+<style type="text/css">
+    body
+    {
+        background: url("/Images/fondo-login.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .vertical
+    {
+        top: 50%;
+        margin-top: 15%;
+    }
+
+    .box-shadow
+    {
+        -webkit-box-shadow: 0px 2px 1px 1px #606060;
+        box-shadow: 0px 2px 1px 1px #ccc;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 5%;
+    }
+
+    .login-titles
+    {
+        width: 100%;
+        margin: 15px 0px 15px 0px;
+    }
+
+        .login-titles h2
+        {
+            font-size: 3.5em;
+            margin: 0px 0px 3px 0px;
+            text-align: center;
+        }
+
+    .welcome-title
+    {
+        color: #A0A0A0;
+        margin: 0px 0px 5px 0px;
+        padding-bottom: 3px;
+        font-size: 0.8em;
+        text-align: center;
+        border-bottom-color: #A0A0A0;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
+
+    .main-title
+    {
+        font-family: 'Open Sans Condensed';
+        margin: 0;
+        color: #09341b;
+    }
+
+    .sub-title
+    {
+        font-family: 'Open Sans Condensed';
+        margin: 0;
+        text-transform: uppercase;
+        color: #09341b;
+        text-align: center;
+    }
+
+    .please-register
+    {
+        font-family: 'Open Sans Condensed';
+        font-size: 1.3em;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    .login-box
+    {
+        padding: 20px;
+        color: white;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        width: 20%;
+        height: 65%;
+        overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-4 col-centered box-shadow" style="margin-top:10%;">
+
+        <img src="~/Images/metso-logo-280-png.png" class="img-responsive col-centered" />
+
+        <div class="login-titles">
+            <h3 class="welcome-title">WELCOME TO THE</h3>
+            <h2 class="main-title">Customer's Visits</h2>
+            <h3 class="sub-title">Planning System</h3>
         </div>
-    </div>
-}*@
 
-<div class="row">
-
-    <div class="col-md-6">
-        <h2>Bienvenido</h2>
         @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
              
             <div class="form-group">
-                @*@Html.LabelFor(m => m.UserName)*@
                 Username
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Enter email" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "@metso.com" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
 
             <div class="form-group">
-                @*@Html.LabelFor(m => m.Password)*@
                 Password
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
                 @Html.ValidationMessageFor(m => m.Password)
@@ -43,20 +129,15 @@
             <div class="checkbox">
                 <label>
                     @Html.CheckBoxFor(m => m.RememberMe)
-                    @*@Html.LabelFor(m => m.RememberMe)*@
                     <label for="RememberMe">Remember Me?</label>
                 </label>
             </div>
             
-            <button type="submit" class="btn btn-default">Login</button>                
+            <button type="submit" class="btn btn-primary btn-block"><strong>Sign In</strong></button>                
+            <a class="btn btn-success btn-block" href="@Url.Action("Register", "Account")">Create Account</a>                    
         }
-
     </div>
-
 </div>
-
-
-
 
 
 

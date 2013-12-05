@@ -41,6 +41,9 @@ namespace CVisits.Models
         [Required]
         public bool EsTodoElDia { get; set; }
 
+        [Required]
+        public bool NotificaCliente { get; set; }
+
         //---------------------------------------------------
         // RELACIONES
         //
@@ -50,16 +53,18 @@ namespace CVisits.Models
         public int LineaProductoID { get; set; }
         public int TipoVisitaID { get; set; }
         public int ClienteID { get; set; }
-        public int UserId { get; set; }
+        public int UserId { get; set; }        
 
         public virtual EstadoVisita EstadoVisita { get; set; }
         public virtual LineaProducto LineaProducto { get; set; }
         public virtual TipoVisita TipoVisita { get; set; }
         public virtual Cliente Cliente { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        public virtual UserProfile UserProfile { get; set; }        
+
+        
 
         //A muchos...
-        public virtual ICollection<Reporte> Reporte { get; set; }
+        public virtual ICollection<Accion> Accion { get; set; }
 
     }
 }

@@ -1,0 +1,50 @@
+﻿@model CVisits.Models.Accion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Accion</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAccion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAccion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Reporte.CFC)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reporte.CFC)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccionResponsable.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccionResponsable.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccionEstado.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccionEstado.Descripcion)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AccionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

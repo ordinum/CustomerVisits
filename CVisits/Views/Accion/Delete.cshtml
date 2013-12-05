@@ -1,0 +1,53 @@
+﻿@model CVisits.Models.Accion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Accion</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAccion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAccion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Reporte.CFC)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reporte.CFC)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccionResponsable.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccionResponsable.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccionEstado.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccionEstado.Descripcion)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

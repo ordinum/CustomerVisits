@@ -1,36 +1,128 @@
 ﻿@model CVisits.Models.RegisterModel
 @{
-    ViewBag.Title = "Registrarse";
+    ViewBag.Title = "Customer's Visits - Sign Up | Metso Minerals";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Cree una cuenta nueva.</h2>
-</hgroup>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
-    <fieldset>
-        <legend>Formulario de registro</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Registrarse" />
-    </fieldset>
-}
+<style type="text/css">
+    body
+    {
+        background: url("/Images/fondo-login.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .vertical
+    {
+        top:50%;
+        margin-top:15%;
+    }
+
+    .box-shadow
+    {
+        -webkit-box-shadow: 0px 2px 1px 1px #606060;
+        box-shadow: 0px 2px 1px 1px #ccc;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 5%;
+    }
+
+    .login-titles
+    {
+        width: 100%;
+        margin: 15px 0px 15px 0px;
+    }
+
+        .login-titles h2
+        {
+            font-size: 3.5em;
+            margin: 0px 0px 3px 0px;
+            text-align: center;
+        }
+
+    .welcome-title
+    {
+        color:#A0A0A0;
+        margin:0px 0px 5px 0px;
+        padding-bottom:3px;
+        font-size:0.8em;
+        text-align:center;
+        border-bottom-color:#A0A0A0;
+        border-bottom-style:solid;
+        border-bottom-width:1px;              
+    }
+
+    .main-title
+    {
+        font-family: 'Open Sans Condensed';
+        margin:0;
+        color:#09341b;
+    }
+
+    .sub-title
+    {
+        font-family: 'Open Sans Condensed';
+        margin:0;
+        text-transform:uppercase;
+        color:#09341b;
+        text-align:center;
+    }
+
+    .please-register
+    {
+        font-family: 'Open Sans Condensed';
+        font-size:1.3em;
+        text-align:center;
+        margin-top:5px;
+
+    }
+
+</style>
+
+
+<div class="container">
+    <div class="col-md-4 box-shadow col-centered" style="margin-top:10%;">
+
+        <img src="~/Images/metso-logo-280-png.png" class="img-responsive col-centered" />
+
+        <div class="login-titles">
+            <h3 class="welcome-title">CUSTOMER'S VISITS</h3>
+            <h2 class="main-title">Sign Up</h2>
+            <h3 class="sub-title">Create New User</h3>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+             
+            <div class="form-group">                
+                Type your @@metso email account
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "user@metso.com" })                
+            </div>
+
+            <div class="form-group">                
+                Type your password
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })                
+            </div>
+            
+            <div class="form-group">                
+                Confirm your password
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm your password" })                
+            </div>            
+            
+            <button type="submit" class="btn btn-primary btn-block"><strong>SIGN UP</strong></button>
+            <a href="@Url.Action("Login","Account")" title="Back to login form" class="btn btn-success btn-block">Back to login form</a>
+        
+            <p class="please-register">The system administrator will be notified to assign the corresponding role. By now, you don't have any special privileges.</p>
+        }
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,69 @@
+﻿@model CVisits.Models.Accion
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Accion</legend>
+
+        @Html.HiddenFor(model => model.AccionID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaAccion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaAccion)
+            @Html.ValidationMessageFor(model => model.FechaAccion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReporteID, "Reporte")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ReporteID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ReporteID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccionResponsableID, "AccionResponsable")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AccionResponsableID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AccionResponsableID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccionEstadoID, "AccionEstado")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AccionEstadoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AccionEstadoID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

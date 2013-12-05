@@ -21,8 +21,7 @@ namespace CVisits.DAL
         public DbSet<EstadoVisita> EstadoVisita { get; set; }
         public DbSet<LineaProducto> LineaProducto { get; set; }
         public DbSet<MaquinaEquipo> MaquinaEquipo { get; set; }
-        public DbSet<Pais> Pais { get; set; }
-        public DbSet<Reporte> Reporte { get; set; }
+        public DbSet<Pais> Pais { get; set; }        
         public DbSet<TipoVisita> TipoVisita { get; set; }
         public DbSet<Visita> Visita { get; set; }               
         public DbSet<UserProfile> UserProfiles { get; set; }

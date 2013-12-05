@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CVisits.Models.ClienteContacto>
+
+@{
+    ViewBag.Title = "Client's Contact List";
+}
+
+<h2>Client's Contact List</h2>
+
+<p>
+    @Html.ActionLink("Assign Contact to Client", "Create")
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+
+        <tr>
+            <th>
+                Contact's Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Client
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ClienteContactoID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ClienteContactoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ClienteContactoID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

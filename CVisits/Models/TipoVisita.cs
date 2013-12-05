@@ -22,8 +22,7 @@ namespace CVisits.Models
         // RELACIONES
         //
 
-        //A muchos...
-        public virtual ICollection<Reporte> Reporte { get; set; }
+        //A muchos...        
         public virtual ICollection<Visita> Visita { get; set; }
     }
 }

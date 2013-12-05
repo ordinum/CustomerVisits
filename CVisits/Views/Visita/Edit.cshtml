@@ -1,115 +1,150 @@
-﻿@model CVisits.Models.Visita
-
+﻿@model CVisits.ViewModels.VisitaEditaData
 @{
     ViewBag.Title = "Edit";
-    DateTime fechaPlanificada = Model.FechaPlanificada;
-    DateTime fechaTermino = Model.FechaTermino;
-    
-        
-    
+    DateTime fechaPlanificada = Model.Visita.FechaPlanificada;
+    DateTime fechaTermino = Model.Visita.FechaTermino;                
 }
+
+
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#FechaPlanificada").datetimepicker({
-            dateFormat: 'yy-mm-dd',
-            timeFormat: 'hh:mm'
-        });
+        //Todos los select son select2...
+        $("select").select2();
 
-
-        $("#FechaTermino").datetimepicker({
-            dateFormat: 'yy-mm-dd',
-            timeFormat: 'hh:mm'
-        });
     });
 </script>
 
-<h2>Edit</h2>
+<!-- VISITA -->
+<div class="row">
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <div class="col-md-5">
 
-    <fieldset>
-        <legend>Visita</legend>
+        <h2>Edit Visit</h2>
 
-        @Html.HiddenFor(model => model.VisitaID)
-        @Html.HiddenFor(model => model.FechaIngreso)
-       
+        @using (Html.BeginForm())
+        {
+    
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaPlanificada)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.FechaPlanificada, new { @Value = fechaPlanificada.ToString("yyyy-MM-dd HH:mm") })
-            @Html.ValidationMessageFor(model => model.FechaPlanificada)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaTermino)
-        </div>
-        <div class="editor-field">            
-            @Html.TextBoxFor(model=>model.FechaTermino, new { @Value = fechaTermino.ToString("yyyy-MM-dd HH:mm")})
-            @Html.ValidationMessageFor(model => model.FechaTermino)
-        </div>
+            @Html.HiddenFor(model => model.Visita.VisitaID)
+            @Html.HiddenFor(model => model.Visita.FechaIngreso)       
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Descripcion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Descripcion)
-            @Html.ValidationMessageFor(model => model.Descripcion)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.FechaPlanificada, "Visit's Date")
+                @Html.TextBoxFor(model => model.Visita.FechaPlanificada, new { @class = "form-control", @Value = fechaPlanificada.ToString("yyyy-MM-dd HH:mm") })
+                @Html.ValidationMessageFor(model => model.Visita.FechaPlanificada)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EstadoVisitaID, "EstadoVisita")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("EstadoVisitaID", String.Empty)
-            @Html.ValidationMessageFor(model => model.EstadoVisitaID)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.FechaTermino, "End Date")
+                @Html.TextBoxFor(model => model.Visita.FechaTermino, new { @class = "form-control", @Value = fechaTermino.ToString("yyyy-MM-dd HH:mm") })
+                @Html.ValidationMessageFor(model => model.Visita.FechaTermino)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LineaProductoID, "LineaProducto")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("LineaProductoID", String.Empty)
-            @Html.ValidationMessageFor(model => model.LineaProductoID)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.Descripcion, "Description")
+                @Html.TextAreaFor(model => model.Visita.Descripcion, new { @class = "form-control", @rows = "5" })
+                @Html.ValidationMessageFor(model => model.Visita.Descripcion)
+            </div> 
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.EstadoVisitaID, "Visit Status")
+                @Html.DropDownList("EstadoVisitaID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Visita.EstadoVisitaID)
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.LineaProductoID, "Product Line")
+                @Html.DropDownList("LineaProductoID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Visita.LineaProductoID)
+            </div>            
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.TipoVisitaID, "Visit Type")
+                @Html.DropDownList("TipoVisitaID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Visita.TipoVisitaID)
+            </div> 
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TipoVisitaID, "TipoVisita")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("TipoVisitaID", String.Empty)
-            @Html.ValidationMessageFor(model => model.TipoVisitaID)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.ClienteID, "Client")
+                @Html.DropDownList("ClienteID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Visita.ClienteID)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ClienteID, "Cliente")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("ClienteID", String.Empty)
-            @Html.ValidationMessageFor(model => model.ClienteID)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.UserId, "Visit scheduled by...")
+                @Html.DropDownList("UserId", String.Empty)
+                @Html.ValidationMessageFor(model => model.Visita.UserId)
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Visita.NotificaCliente, "Notify Client?")
+                @Html.CheckBoxFor(model => model.Visita.NotificaCliente)
+                <span class="help-block">If check, Client's Contact will be notified about the visit.
+                </span>
+                @Html.ValidationMessageFor(model => model.Visita.NotificaCliente)
+            </div>              
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserId, "UserProfile")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("UserId", String.Empty)
-            @Html.ValidationMessageFor(model => model.UserId)
-        </div>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-save"></span>Save Changes
+                </button>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+                <a href="@Url.Action("AsignarAcciones", "Visita", new { VisitaID = Model.Visita.VisitaID })" class="btn btn-info"><span class="glyphicon glyphicon-plus-sign"></span>Assign Actions</a>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span>To Calendar</a>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+@if (Model.Acciones.Count() > 0)
+{
+    <div class="row">
+        <h2>Actions Assigned</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date Added</th>
+                    <th>Responsible</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.Acciones)
+                {
+                    <tr>
+                        <td>@item.FechaAccion.ToShortDateString()</td>
+                        <td>@item.AccionResponsableID</td>
+                        <td>@item.AccionEstadoID</td>
+                        <td>@item.Descripcion</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="btn-group">
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-save"></span>Save Changes
+        </button>
+        <a href="@Url.Action("AsignarAcciones", "Visita", new { VisitaID = Model.Visita.VisitaID })" class="btn btn-info"><span class="glyphicon glyphicon-plus-sign"></span>Assign Actions</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span>To Calendar</a>
+    </div>
+    
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

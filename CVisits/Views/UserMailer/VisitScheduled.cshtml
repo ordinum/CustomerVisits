@@ -1,0 +1,72 @@
+<style>
+
+    body
+    {
+        font-family:Verdana,Arial,sans-serif;
+    }
+
+    img
+    {
+        border:none;        
+    }
+
+    h1,h2,h3,h4,h5,h6
+    {                
+        color:#808080;
+        margin-bottom:5px;
+        margin-top:5px;
+    }
+
+    h1
+    {
+        font-size:1.5em;
+    }
+
+    h2
+    {
+        font-size:1.1em;
+    }
+
+    p
+    {
+        font-size:0.9em;
+        color:#000000;
+    }
+
+    .visit-info
+    {
+        margin-top: 10px;
+        padding:8px;
+        clear:both;
+        border-width:1px;
+        border-color:#c6c6c6;
+        border-style:solid;
+        background-color:#e4e4e4;
+    }
+
+    .description
+    {
+        clear:both;
+        margin-top:3px;        
+    }
+
+
+</style>
+<img src="http://www.metso.com/corporation/home_eng.nsf/WebSettings/Settings/$file/signature.png" alt="Metso Corporation" />
+
+<h1>Dear Customer @ViewBag.ClientName</h1>
+
+<p>
+    A new customer visit has been scheduled for you by a Metso Engineer. Visit's details are as follows :
+</p>
+
+
+<div class="visit-info">
+    <p>Visitor : <strong>@ViewBag.VisitorName</strong></p>
+    <p>Scheduled Date : <strong>@ViewBag.VisitDate</strong></p>
+    <p>Visit Type : <strong>@ViewBag.VisitType</strong></p>
+    <p>Description :</p>
+    <p class="description">
+        @ViewBag.VisitDescription
+    </p>
+</div>

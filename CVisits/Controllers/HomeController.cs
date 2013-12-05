@@ -30,6 +30,11 @@ namespace CVisits.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ElasticSlide()
+        {         
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

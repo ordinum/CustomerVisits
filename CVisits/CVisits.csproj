@@ -47,6 +47,9 @@
       <HintPath>..\packages\jQueryUIHelpers.Mvc4.2.1.0\lib\net40\JQueryUIHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -195,7 +198,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccionController.cs" />
+    <Compile Include="Controllers\AccionEstadoController.cs" />
+    <Compile Include="Controllers\AccionResponsableController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClienteContactoController.cs" />
     <Compile Include="Controllers\ClienteController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -222,6 +229,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
     <Compile Include="Migrations\201308220433592_InitialCreate.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -251,6 +260,26 @@
     <Compile Include="Migrations\201311070548291_v3azure.cs" />
     <Compile Include="Migrations\201311070548291_v3azure.Designer.cs">
       <DependentUpon>201311070548291_v3azure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312041928330_agregaAccionaVisita.cs" />
+    <Compile Include="Migrations\201312041928330_agregaAccionaVisita.Designer.cs">
+      <DependentUpon>201312041928330_agregaAccionaVisita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312050229418_agregaboolnotificacliente.cs" />
+    <Compile Include="Migrations\201312050229418_agregaboolnotificacliente.Designer.cs">
+      <DependentUpon>201312050229418_agregaboolnotificacliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312050659102_eliminareporte.cs" />
+    <Compile Include="Migrations\201312050659102_eliminareporte.Designer.cs">
+      <DependentUpon>201312050659102_eliminareporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312050711561_corrigecardinalidadAccionVisita.cs" />
+    <Compile Include="Migrations\201312050711561_corrigecardinalidadAccionVisita.Designer.cs">
+      <DependentUpon>201312050711561_corrigecardinalidadAccionVisita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312050726477_quepasa.cs" />
+    <Compile Include="Migrations\201312050726477_quepasa.Designer.cs">
+      <DependentUpon>201312050726477_quepasa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -307,6 +336,8 @@
     <Compile Include="ViewModels\ClienteAdd.cs" />
     <Compile Include="ViewModels\DaysSelection.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
+    <Compile Include="ViewModels\VisitaAccionesViewModel.cs" />
+    <Compile Include="ViewModels\VisitaEditaData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CVisits-v1.mdf" />
@@ -315,6 +346,28 @@
     </Content>
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\elasticslide\css\demo.css" />
+    <Content Include="Content\elasticslide\css\reset.css" />
+    <Content Include="Content\elasticslide\css\style.css" />
+    <Content Include="Content\elasticslide\images\Image Attribution.txt" />
+    <Content Include="Content\elasticslide\images\large\1.jpg" />
+    <Content Include="Content\elasticslide\images\large\2.jpg" />
+    <Content Include="Content\elasticslide\images\large\3.jpg" />
+    <Content Include="Content\elasticslide\images\large\4.jpg" />
+    <Content Include="Content\elasticslide\images\large\5.jpg" />
+    <Content Include="Content\elasticslide\images\large\6.jpg" />
+    <Content Include="Content\elasticslide\images\large\7.jpg" />
+    <Content Include="Content\elasticslide\images\pattern.png" />
+    <Content Include="Content\elasticslide\images\previewcredits.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\1.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\2.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\3.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\4.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\5.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\6.jpg" />
+    <Content Include="Content\elasticslide\images\thumbs\7.jpg" />
+    <Content Include="Content\elasticslide\js\jquery.easing.1.3.js" />
+    <Content Include="Content\elasticslide\js\jquery.eislideshow.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -387,13 +440,17 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\elasticslide\js\jquery.eislideshow.js.bak" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\metsocustomervisits - Web Deploy.pubxml" />
     <Content Include="Images\brasil-miniatura.png" />
     <Content Include="Images\chile-miniatura.png" />
+    <Content Include="Images\fondo-fabrica.jpg" />
     <Content Include="Images\fondo-login.jpg" />
     <Content Include="Images\grua-bkg.jpg" />
     <Content Include="Images\grungeTexture.jpg" />
+    <Content Include="Images\metso-logo-280-png.png" />
+    <Content Include="Images\metso-logo-280.jpg" />
     <Content Include="Images\metso-logo-footer.png" />
     <Content Include="Images\metso-logo-white.png" />
     <Content Include="Images\metso-logo.png" />
@@ -413,6 +470,8 @@
     <Content Include="Images\semi-blanco.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ElasticSlide\jquery.easing.1.3.js" />
+    <Content Include="Scripts\ElasticSlide\jquery.eislideshow.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
@@ -431,13 +490,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout-3.0.0.js" />
+    <Content Include="Scripts\knockout.namepathbinding.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Parallax\jquery.inview.js" />
-    <Content Include="Scripts\Parallax\jquery.localscroll-1.2.7-min.js" />
-    <Content Include="Scripts\Parallax\jquery.scrollTo-1.4.2-min.js" />
-    <Content Include="Scripts\Parallax\nbw-parallax.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -499,11 +554,38 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Scripts\ElasticSlide\jquery.eislideshow.js.bak" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Visita\WeekPlanner.cshtml" />
     <Content Include="Views\Shared\_FooterBar.cshtml" />
     <Content Include="Views\Visita\VisitsDaysSelection.cshtml" />
+    <Content Include="Views\Home\ElasticSlide.cshtml" />
+    <Content Include="Views\ClienteContacto\Index.cshtml" />
+    <Content Include="Views\ClienteContacto\Details.cshtml" />
+    <Content Include="Views\ClienteContacto\Create.cshtml" />
+    <Content Include="Views\ClienteContacto\Edit.cshtml" />
+    <Content Include="Views\ClienteContacto\Delete.cshtml" />
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+    <Content Include="Views\UserMailer\Welcome.cshtml" />
+    <Content Include="Views\UserMailer\VisitScheduled.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Accion.cshtml" />
+    <Content Include="Views\Visita\AsignarAcciones.cshtml" />
+    <Content Include="Views\AccionEstado\Create.cshtml" />
+    <Content Include="Views\AccionEstado\Delete.cshtml" />
+    <Content Include="Views\AccionEstado\Details.cshtml" />
+    <Content Include="Views\AccionEstado\Edit.cshtml" />
+    <Content Include="Views\AccionEstado\Index.cshtml" />
+    <Content Include="Views\AccionResponsable\Create.cshtml" />
+    <Content Include="Views\AccionResponsable\Delete.cshtml" />
+    <Content Include="Views\AccionResponsable\Details.cshtml" />
+    <Content Include="Views\AccionResponsable\Edit.cshtml" />
+    <Content Include="Views\AccionResponsable\Index.cshtml" />
+    <Content Include="Views\Accion\Create.cshtml" />
+    <Content Include="Views\Accion\Delete.cshtml" />
+    <Content Include="Views\Accion\Details.cshtml" />
+    <Content Include="Views\Accion\Edit.cshtml" />
+    <Content Include="Views\Accion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -527,6 +609,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201311070548291_v3azure.resx">
       <DependentUpon>201311070548291_v3azure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312041928330_agregaAccionaVisita.resx">
+      <DependentUpon>201312041928330_agregaAccionaVisita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312050229418_agregaboolnotificacliente.resx">
+      <DependentUpon>201312050229418_agregaboolnotificacliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312050659102_eliminareporte.resx">
+      <DependentUpon>201312050659102_eliminareporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312050711561_corrigecardinalidadAccionVisita.resx">
+      <DependentUpon>201312050711561_corrigecardinalidadAccionVisita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312050726477_quepasa.resx">
+      <DependentUpon>201312050726477_quepasa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

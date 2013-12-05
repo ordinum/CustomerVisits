@@ -1,0 +1,43 @@
+﻿@model CVisits.Models.Accion
+
+<!-- ko foreach: positions -->
+
+<fieldset>
+
+    <div class="row accion-repetitiva">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaAccion, "Actual Date", new { @class = "sr-only" })
+                    @Html.TextBoxFor(model => model.FechaAccion, new { data_bind = "value: fechaaccion, namePath: true", @class = "form-control fecha-accion", @placeholder = "Choose Date..." })
+                    @Html.ValidationMessageFor(model => model.FechaAccion)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AccionResponsableID, "Responsible", new { @class = "sr-only" })
+                    @Html.DropDownList("AccionResponsableID", null, "Choose Responsible...", new { data_bind = "value: responsable, namePath: true" })
+                    @Html.ValidationMessageFor(model => model.AccionResponsableID)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AccionEstadoID, "Status", new { @class = "sr-only" })
+                    @Html.DropDownList("AccionEstadoID", null, "Choose Status...", new { data_bind = "value: accionestado, namePath: true" })
+                    @Html.ValidationMessageFor(model => model.AccionEstadoID)
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, "Description", new { @class = "sr-only" })
+                    @Html.TextAreaFor(model => model.Descripcion, new { data_bind = "value: descripcion, namePath: true", @class = "form-control", @placeholder = "Type Description", @rows = "5" })
+                    @Html.ValidationMessageFor(model => model.Descripcion)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</fieldset>
+<!-- /ko -->
